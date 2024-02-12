@@ -27,7 +27,7 @@ with app.app_context():
     # Izveidojam datubāzi
     db.create_all()
 
-# Dekorācija uz uzdevuma izveidi Tabulā1
+# Dekorācija uz ieraksta izveidi Tabulā1
 def create_entry(data):
     new_entry = Tabula1(vards=data['vards'], uzvards=data['uzvards'], vecums=data['vecums'])
 
