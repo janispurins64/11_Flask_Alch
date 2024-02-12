@@ -1,11 +1,11 @@
 from flask import Flask, render_template, request, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
+#from models import User
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///test.db'
 db = SQLAlchemy(app)
-
 # Definējam datubāzes modeļus
 class Tabula1(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -18,9 +18,14 @@ class Tabula2(db.Model):
     veids = db.Column(db.String(50), nullable=False)
     datums1 = db.Column(db.DateTime, default=datetime.utcnow)
     skaits = db.Column(db.Integer, nullable=False)
+class Task(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    content = db.Column(db.String(200), nullable=False)
 
 # Izveidojam datubāzi
-db.create_all()
+with app.app_context():
+    # Izveidojam datubāzi
+    db.create_all()
 
 # Dekorācija uz uzdevuma izveidi Tabulā1
 def create_entry(data):
