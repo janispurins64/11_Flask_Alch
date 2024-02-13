@@ -11,6 +11,13 @@
         <input type="text" name="content" required>
         <button type="submit">Add Task</button>
     </form>
+    <h1>Personas dati</h1>
+    <form method="POST" action="/add_tabula1">
+        <input type="text" name="vards" required>
+        <input type="text" name="uzvards" required>
+        <input type="text" name="vecums" required>
+        <button type="submit">Pievienot</button>
+    </form>
     <ul>
         {% for task in tasks %}
             <li>

@@ -38,15 +38,84 @@ def create_entry(data):
     except:
         return 'Kaut kas nogāja greizi.'
 
+# Dekorācija uz uzdevuma izveidi Tabulā1
+def create_entry_tabula1(data):
+    new_entry = Tabula1(vards=data['vards'], uzvards=data['uzvards'], vecums=data['vecums'])
+
+    try:
+        db.session.add(new_entry)
+        db.session.commit()
+        return 'Ieraksts pievienots veiksmīgi.'
+    except:
+        return 'Kaut kas nogāja greizi.'
+
+# Dekorācija uz uzdevuma izveidi Tabulā2
+def create_entry_tabula2(data):
+    new_entry = Tabula2(veids=data['veids'], skaits=data['skaits'])
+
+    try:
+        db.session.add(new_entry)
+        db.session.commit()
+        return 'Ieraksts pievienots veiksmīgi.'
+    except:
+        return 'Kaut kas nogāja greizi.'
+
 # Dekorācija uz datu izgūšanu no Tabulas2 ar nosacījumu
 def fetch_data_conditionally():
     data = Tabula2.query.filter(Tabula2.skaits > 4).all()
     return data
+def fetch_data_tabula1_visi():
+    data_tabula1 = Tabula1.query.all()
+    # Izveidojam vārdnīcu ar datiem
+    result = []
+    for entry in data_tabula1:
+        result.append({
+            'id': entry.id,
+            'vards': entry.vards,
+            'uzvards': entry.uzvards,
+            'vecums': entry.vecums
+        })
+    return result
 
 @app.route('/')
 def index():
     data_tabula2 = fetch_data_conditionally()
     return render_template('index.html', data_tabula2=data_tabula2)
+
+@app.route('/visi')
+def visi():
+    data_tabula1 = fetch_data_tabula1_visi()
+    print("Tas ko saņem pirms lapas")
+    print(data_tabula1)
+    return render_template('personas.html', task=data_tabula1)
+
+@app.route('/add_tabula1', methods=['POST'])
+def add_tabula1():
+    data = {
+        'vards': request.form['vards'],
+        'uzvards': request.form['uzvards'],
+        'vecums': int(request.form['vecums'])
+    }
+    result = create_entry_tabula1(data)
+    return result
+
+@app.route('/add_tabula2', methods=['POST'])
+def add_tabula2():
+    data = {
+        'veids': request.form['veids'],
+        'skaits': int(request.form['skaits'])
+    }
+    result = create_entry_tabula2(data)
+    return result
+
+
+
+
+
+
+
+
+
 
 @app.route('/add', methods=['POST'])
 def add():
