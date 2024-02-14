@@ -87,7 +87,7 @@ def visi():
     data_tabula1 = fetch_data_tabula1_visi()
     print("Tas ko saņem pirms lapas")
     print(data_tabula1)
-    return render_template('personas.html', task=data_tabula1)
+    return render_template('personas.html', tasks=data_tabula1)
 
 @app.route('/add_tabula1', methods=['POST'])
 def add_tabula1():
@@ -107,15 +107,6 @@ def add_tabula2():
     }
     result = create_entry_tabula2(data)
     return result
-
-
-
-
-
-
-
-
-
 
 @app.route('/add', methods=['POST'])
 def add():
