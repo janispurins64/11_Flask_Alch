@@ -119,6 +119,10 @@ def add():
         return redirect('/')
     except:
         return 'Kaut kas nogāja greizi'
+@app.route('/kalendars')
+def kalendars():
+    
+    return render_template('kalendars.html')
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, host= "0.0.0.0", port=5000)
