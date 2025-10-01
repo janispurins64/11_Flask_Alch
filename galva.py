@@ -38,7 +38,7 @@ def create_entry(data):
     except:
         return 'Kaut kas nogāja greizi.'
 
-# Dekorācija uz uzdevuma izveidi Tabulā1
+# Dekorācija uz ieraaksta izveidi Tabulā1
 def create_entry_tabula1(data):
     new_entry = Tabula1(vards=data['vards'], uzvards=data['uzvards'], vecums=data['vecums'])
 
@@ -49,7 +49,7 @@ def create_entry_tabula1(data):
     except:
         return 'Kaut kas nogāja greizi.'
 
-# Dekorācija uz uzdevuma izveidi Tabulā2
+# Dekorācija uz ieraksta izveidi Tabulā2
 def create_entry_tabula2(data):
     new_entry = Tabula2(veids=data['veids'], skaits=data['skaits'])
 
